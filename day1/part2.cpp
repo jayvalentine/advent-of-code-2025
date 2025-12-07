@@ -4,7 +4,7 @@ int main(int argc, char* argv[])
 {
     if (argc != 2)
     {
-        std::cout << "Usage: part1 <data-file-path>" << std::endl;
+        std::cout << "Usage: part2 <data-file-path>" << std::endl;
         return 1;
     }
 
@@ -15,12 +15,10 @@ int main(int argc, char* argv[])
     int zero_count = 0;
     for (const auto& r : rotations)
     {
-        auto [new_dial, _] = r.apply(dial);
+        auto [new_dial, passed_zero_count] = r.apply(dial);
+        std::cout << "New position: " << new_dial << ", passed zero " << passed_zero_count << " times" << std::endl;
         dial = new_dial;
-        if (dial == 0)
-        {
-            zero_count++;
-        }
+        zero_count += passed_zero_count;
     }
 
     std::cout << "Password: " << zero_count << std::endl;
